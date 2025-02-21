@@ -7,6 +7,10 @@ import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import {
   DocumentEditorAllModule,
   DocumentEditorContainerModule,
+  EditorService,
+  SelectionService,
+  SfdtExportService,
+  TextExportService,
   ToolbarService,
 } from '@syncfusion/ej2-angular-documenteditor';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,7 +37,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DocumentEditorContainerModule,
     BrowserAnimationsModule,
   ],
-  providers: [ToolbarService],
+  providers: [
+    ToolbarService,
+    EditorService,
+    SelectionService,
+    SfdtExportService,
+    TextExportService,
+  ],
   bootstrap: [AppComponent],
   exports: [HeaderComponent, SidebarComponent],
 })
