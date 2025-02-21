@@ -1,0 +1,20 @@
+<div class="inline-text-editor-main-container">
+  <div class="navigate-to-dashboard-btn">
+    <button mat-button (click)="backToDashboard()">Back</button>
+  </div>
+  <ejs-documenteditorcontainer
+    #document_editor
+    serviceUrl="http://localhost:8080/api/inlineDocumentService/"
+    height="calc(100% - 21px)"
+    [toolbarItems]="items"
+    (toolbarClick)="onToolbarClick($event)"
+    style="display: block"
+    [enableToolbar]="true"
+    [currentUser]="userInfo.userName"
+    [enableTrackChanges]="true"
+    (created)="onCreated()"
+  >
+  </ejs-documenteditorcontainer>
+</div>
+
+<!-- serviceUrl="https://services.syncfusion.com/angular/production/api/documenteditor/" -->
