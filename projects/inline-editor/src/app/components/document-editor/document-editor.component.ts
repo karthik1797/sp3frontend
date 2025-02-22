@@ -49,17 +49,13 @@ export class DocumentEditorComponent implements OnInit, AfterViewInit {
     id: 'rejectChange',
   };
 
-  public items = [
+  public items: any = [
     'New',
     'Open',
     this.toolSaveItem,
-    this.toolApproveItem,
     'Separator',
     'Undo',
     'Redo',
-    // this.toolTrackItem,
-    // this.toolAcceptItem,
-    // this.toolRejectItem,
     'Separator',
     'Image',
     'Table',
@@ -99,6 +95,11 @@ export class DocumentEditorComponent implements OnInit, AfterViewInit {
   getUserDetails() {
     userDetails().then((res: any) => {
       this.userInfo = res;
+      if(this.userInfo?.approver){
+        this.items.splice(3, 0, this.toolApproveItem);
+        this.container.toolbarItems = this.items;
+        this.container.refresh();
+      }
     });
   }
 
@@ -134,8 +135,7 @@ export class DocumentEditorComponent implements OnInit, AfterViewInit {
     //Specifies the language id to map server side dictionary.
     this.container.documentEditor.spellChecker.languageID = 1033;
     this.container.documentEditor.spellChecker.removeUnderline = false;
-    this.container.documentEditor.spellChecker.allowSpellCheckAndSuggestion =
-      true;
+    this.container.documentEditor.spellChecker.allowSpellCheckAndSuggestion = true;
   }
   // Function to handle saving the document
   public onSaveDocument(): void {
@@ -185,7 +185,7 @@ export class DocumentEditorComponent implements OnInit, AfterViewInit {
         type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       });
       let formdata = new FormData();
-      formdata.append('files', blob);
+      formdata.append('files', file);
       formdata.append('approverName', this.userInfo.userName);
 
       this.http
